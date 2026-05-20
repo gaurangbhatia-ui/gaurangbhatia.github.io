@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaurang Bhatia | Premium Digital Portfolio</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #050507;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --accent-1: #6366f1; /* Indigo */
+            --accent-2: #ec4899; /* Pink */
+            --accent-3: #8b5cf6; /* Purple */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Outfit', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* 3D Animated Background Orbs */
+        .ambient-orbs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            animation: float 20s infinite ease-in-out alternate;
+        }
+
+        .orb-1 {
+            width: 400px; height: 400px;
+            background: var(--accent-1);
+            top: -10%; left: -10%;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 500px; height: 500px;
+            background: var(--accent-2);
+            bottom: -20%; right: -10%;
+            animation-delay: -5s;
+        }
+
+        .orb-3 {
+            width: 350px; height: 350px;
+            background: var(--accent-3);
+            top: 40%; left: 50%;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(100px, 50px) scale(1.2); }
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            perspective: 1000px; /* Enables 3D space */
+        }
+
+        /* Hero Section */
+        header {
+            text-align: center;
+            margin-bottom: 5rem;
+            animation: fadeUp 1s ease-out;
+        }
+
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 800;
+            letter-spacing: -1px;
+            background: linear-gradient(to right, #fff, #a5b4fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--accent-2);
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+        }
+
+        .summary {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.15rem;
+            color: #d1d5db;
+            font-weight: 300;
+        }
+
+        /* 3D Glassmorphism Cards */
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            height: 2px;
+            flex-grow: 1;
+            background: linear-gradient(to right, var(--glass-border), transparent);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        /* The 3D Card Class */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+            animation: fadeUp 1s ease-out backwards;
+        }
+
+        /* Staggered load animations */
+        .glass-card:nth-child(1) { animation-delay: 0.2s; }
+        .glass-card:nth-child(2) { animation-delay: 0.4s; }
+
+        /* Push content forward in 3D space */
+        .card-content {
+            transform: translateZ(30px);
+        }
+
+        .glass-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #fff;
+        }
+
+        /* Tags for Skills */
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: #e5e7eb;
+            transition: all 0.3s ease;
+        }
+
+        .tag:hover {
+            background: var(--accent-1);
+            color: #fff;
+            border-color: var(--accent-1);
+            transform: translateY(-2px);
+        }
+
+        /* Experience Timeline */
+        .job-block {
+            margin-bottom: 2.5rem;
+        }
+        .job-block:last-child { margin-bottom: 0; }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .job-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--accent-1);
+        }
+
+        .job-company {
+            font-size: 1rem;
+            color: #fff;
+            font-weight: 400;
+        }
+
+        .job-date {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            background: rgba(255,255,255,0.05);
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+        }
+
+        ul.job-details {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul.job-details li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #d1d5db;
+            font-weight: 300;
+        }
+
+        ul.job-details li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-2);
+            font-weight: bold;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ambient-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="container">
+        
+        <header>
+            <h1>GAURANG BHATIA</h1>
+            <div class="subtitle">Content Creator | Digital Strategist | Graphic Designer | E-Commerce Web Developer</div>
+            
+            <div class="contact-info">
+                <span>Jaipur, Rajasthan, India</span> • 
+                <span>gaurangbhatia0529@gmail.com</span> • 
+                <span>7850077347</span> • 
+                <span>Feb 19, 2004</span>
+            </div>
+
+            <p class="summary">
+                Dynamic and highly versatile digital professional specializing in e-commerce strategy, visual design, and AI-driven growth. Expert in leveraging generative AI to accelerate content production and optimize workflows. Proven track record in scaling international B2B marketing pipelines, crafting compelling brand identities, and engineering SEO-optimized multimedia experiences.
+            </p>
+        </header>
+
+        <div class="grid-2">
+            <div class="glass-card js-tilt">
+                <div class="card-content">
+                    <h3>Core Expertise</h3>
+                    <div class="tags-container">
+                        <span class="tag">AI Prompt Engineering</span>
+                        <span class="tag">B2B Content Strategy</span>
+                        <span class="tag">On-Page SEO Optimization</span>
+                        <span class="tag">E-commerce UI (HTML/CSS)</span>
+                        <span class="tag">Video & Social Marketing</span>
+                        <span class="tag">Brand Identity Creation</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card js-tilt">
+                <div class="card-content">
+                    <h3>Tools & Tech</h3>
+                    <div class="tags-container">
+                        <span class="tag">Generative AI (ChatGPT, Gemini)</span>
+                        <span class="tag">Shopify Plus & Advanced</span>
+                        <span class="tag">Yoast SEO</span>
+                        <span class="tag">Wondershare Filmora / Canva</span>
+                        <span class="tag">YouTube & Pinterest</span>
+                        <span class="tag">LinkedIn & Instagram</span>
+                    </div>
+                    
+                    <h3 style="margin-top: 2rem; font-size: 1.2rem;">Languages</h3>
+                    <div class="tags-container">
+                        <span class="tag">English (Professional)</span>
+                        <span class="tag">Hindi & Hinglish (Native/Bilingual)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Work Experience</h2>
+        
+        <div class="glass-card js-tilt" style="margin-bottom: 2rem; animation-delay: 0.6s;">
+            <div class="card-content">
+                <div class="job-block">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">Digital Marketing & E-Commerce Specialist</div>
+                            <div class="job-company">Handicraft Villa - Jaipur, India</div>
+                        </div>
+                        <div class="job-date">May 2025 - Present</div>
+                    </div>
+                    <ul class="job-details">
+                        <li>Spearhead advanced on-page SEO strategies utilizing Yoast and Rank Math, driving organic search rankings and authoring high-value B2B resources such as 'The Ultimate B2B Sourcing Guide for Artisanal Leather Goods'.</li>
+                        <li>Direct comprehensive video and social media campaigns across YouTube, Pinterest, and LinkedIn, focusing on 'slow luxury' and traditional craftsmanship.</li>
+                        <li>Enhance e-commerce user experience for product listings and evaluating enterprise platforms, including comparative scaling analyses of Shopify/WordPress.</li>
+                        <li>Integrate generative AI for rapid visual prototyping and scriptwriting, blending conceptual AI assets with real-world artistry while conducting rigorous QA to guarantee brand accuracy.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-2" style="margin-bottom: 0;">
+            <div class="glass-card js-tilt" style="animation-delay: 0.8s;">
+                <div class="card-content">
+                    <div class="job-block">
+                        <div class="job-header">
+                            <div>
+                                <div class="job-title">Digital Strategist & Web Designer</div>
+                                <div class="job-company">Travel & Tourism Clients</div>
+                            </div>
+                            <div class="job-date">Project-Based</div>
+                        </div>
+                        <ul class="job-details">
+                            <li>Architected comprehensive brand identities and designed immersive, high-conversion websites for international tour packages.</li>
+                            <li>Integrated AI workflow assistants for rapid UX prototyping, engaging copywriting, and seamless technical troubleshooting.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card js-tilt" style="animation-delay: 1s;">
+                <div class="card-content">
+                    <div class="job-block">
+                        <div class="job-header">
+                            <div>
+                                <div class="job-title">Digital Marketing Strategist</div>
+                                <div class="job-company">FMCG & Wellness Brands</div>
+                            </div>
+                            <div class="job-date">Project-Based</div>
+                        </div>
+                        <ul class="job-details">
+                            <li>Developed the digital marketing pipeline for flagship natural product lines, featuring bespoke 3D website themes.</li>
+                            <li>Executed high-ROI social media ad campaigns, utilizing AI algorithms to refine B2B targeting and optimize distributor outreach.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="glass-card js-tilt" style="animation-delay: 1.2s; grid-column: 1 / -1;">
+                <div class="card-content">
+                    <div class="job-block">
+                        <div class="job-header">
+                            <div>
+                                <div class="job-title">Content Creator & Graphic Designer</div>
+                                <div class="job-company">Digital Agencies & Freelance</div>
+                            </div>
+                            <div class="job-date">Project-Based</div>
+                        </div>
+                        <ul class="job-details">
+                            <li>Produced high-quality bespoke brand assets, commemorative social media graphics, and digital banners for corporate clients.</li>
+                            <li>Leveraged AI generative tools to significantly accelerate scripting, storyboarding, and conceptualization for dual-language (Hindi/English) multimedia content.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const cards = document.querySelectorAll('.js-tilt');
+
+        cards.forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left; // x position within the element
+                const y = e.clientY - rect.top;  // y position within the element
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                // Calculate rotation (max 10 degrees)
+                const rotateX = ((y - centerY) / centerY) * -10;
+                const rotateY = ((x - centerX) / centerX) * 10;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                
+                // Dynamic lighting effect based on mouse position
+                const lightX = (x / rect.width) * 100;
+                const lightY = (y / rect.height) * 100;
+                card.style.background = `
+                    radial-gradient(
+                        circle at ${lightX}% ${lightY}%, 
+                        rgba(255, 255, 255, 0.08) 0%, 
+                        rgba(255, 255, 255, 0.02) 60%
+                    )
+                `;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                // Reset card to original state
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+                card.style.background = `var(--glass-bg)`;
+            });
+        });
+    </script>
+</body>
+</html>
